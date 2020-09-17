@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>test</title>
+</head>
+
+<body>
+  <script>
+
+    /*
+      第二个输入为字符串长度 中文字符两字节，英文字符一字节
+      输入：1234567 5 输出：1234... 输入：一二三四五六七八 5 输出：一二...
+      
+      */
+    let str1 = `a稍a等Aas 5`
+    let str2 = `aaaa 7`
+
+    function strJudge(str) {
+      let str_ = str.split(' ')[0]
+      let strlen = str.split(' ')[1]
+      let cutNum = 8, len = 0
+      for (let i = 0; i < str_.length; i++) {
+        if (str_[i].match(/[\u4E00-\u9FA5]/)) {
+          if (i < 4) {
+            cutNum -= 2
+          }
+          len += 2;
+        } else {
+          if (i < 4) {
+            cutNum--
+          }
+          len++
+        }
+      }
+      cutNum = cutNum == 0 ? 2 : cutNum
+      return len > strlen ? str_.substr(0, cutNum) + '...' : str_ + '...'
+    }
+
+
+    console.log(strJudge(str1));
+    console.log(strJudge(str2));
+
+    /* 栈最小值
+        输入：6
+            push 3
+            push 2
+            push 1
+            getMin
+            pop
+            getMin
+        输出：
+          1
+          2
+     */
+
+    /* 
+      输入一个数将其倒置后，去除0，并转化为5进制
+      1、输入 1000  输出 1
+      2、输入 77267  输出 4420102
+    */
+    function fomartNum(num) {
+      // 数字类型转换为字符串要加上toString()
+      let numarr = num.toString().split(''), temp = [], res;
+      for (let i = numarr.length - 1; i >= 0; i--) {
+        if (numarr[i] !== '0') {
+          temp = numarr.slice(0, i + 1)
+          break;
+        }
+      }
+      res = temp.reverse().join('')
+      // 以下表示从10进制转换为5进制
+      res = parseInt(res).toString(5)
+      return res
+    }
+
+
+  </script>
+</body>
+
+</html>

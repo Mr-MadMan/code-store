@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>闭包test</title>
+</head>
+
+<body>
+  <ul class="uls">
+    <li class="current">商品介绍</li>
+    <li>规格与包装</li>
+    <li>售后保障</li>
+    <li>商品评价</li>
+    <li>手机社区</li>
+  </ul>
+  <script>
+    // 闭包应用--3秒后打印li元素的内容
+    var lis = document.querySelector('.uls').querySelectorAll('li');
+    for (var i = 0; i < lis.length; i++) {
+      ((i) => {
+        setTimeout(() => {
+          console.log(lis[i].innerHTML);
+        }, 3000);
+      })(i);
+    }
+
+    // 计算打车价格
+    // 打车起步价13(3公里内)，每公里多增加5元，用户输入公里数即可计算打车价格
+    // 若有拥堵情况，总价格多收取10元拥堵费
+    var carCost = (() => {
+      let startCost = 13;  //起步价
+      let total = 0;  //总价格
+      return {
+        // 正常价格
+        price(m) {
+          if (m <= 3) {
+            total = startCost;
+          } else {
+            total = startCost + (m - 3) * 5;
+          }
+          return total;
+        },
+        // 计算拥堵的费用
+        yd(flag) {
+          return flag ? total + 10 : total;
+        }
+      }
+    })();
+    console.log(carCost.price(5));  //23
+    console.log(carCost.yd(true));  //33
+
+    console.log(carCost.price(2));  //13
+    console.log(carCost.yd(false));  //13
+
+    var name = "The Window";
+    var obj = {
+      name: "My Object",
+      getNameFunc() {
+        return function () {
+          return this.name
+        }
+      }
+    }
+    console.log(obj.getNameFunc()());  //The Window
+
+    //可拆解为  1.
+    var f = obj.getNameFunc();
+    //Step2
+    var f = function () {
+      //此处匿名函数的this指向的是window
+      return this.name;
+    }
+    f();
+    // 又相当于以下操作
+    // function(){this}()   类似于立即执行函数，立即执行函数的this指向window
+
+
+    var name = "The Window";
+    var obj = {
+      name: "My Object",
+      getNameFunc() {
+        var that = this;
+        return function () {
+          return that.name
+        }
+      }
+    }
+    console.log(obj.getNameFunc()());  //My Object
+    // 类似于
+    // var f = obj.getNameFunc();
+    // var f = function () {
+    //   return that.name;
+    // }
+    // f();
+  </script>
+</body>
+
+</html>

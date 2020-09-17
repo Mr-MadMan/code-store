@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="login-header"><a href="javascript:;" id="link">点我试试</a></div>
+    <div id="login" class="login">
+        <div id="title" class="login-title">登陆会员
+            <span><a id="closeBtn" class="close-login" href="javascript:void(0);">关闭</a></span>
+        </div>
+        <div class="login-input-content">
+            <div class="login-input">
+                <label>用户名: </label>
+                <input class="list-input" type="text" name="info[username]" id="username" placeholder="请输入用户名">
+            </div>
+            <div class="login-input">
+                <label>登陆密码: </label>
+                <input class="list-input" type="password" name="info[password]" id="password" placeholder="请输入密码">
+            </div>
+        </div>
+        <div id="loginBtn" class="login-button"><a href="javascript:void(0);" id="login-button-submit">登陆</a></div>
+    </div>
+    <!-- 遮盖层 -->
+    <div id="bg" class="login-bg"></div>
+    <style>
+        .login-header {
+            text-align: center
+        }
+
+        .login {
+            display: none;
+            width: 512px;
+            height: 280px;
+            position: fixed;
+            border: #ebebeb solid 1px;
+            left: 50%;
+            top: 50%;
+            background: #ffffff;
+            border-style: 0px 0px 20px #c0c0c0;
+            z-index: 3;
+            transform: translate(-50%, -50%);
+        }
+
+        .login-title {
+            widows: 100%;
+            margin: 10px 0px 0px 0px;
+            text-align: center;
+            line-height: 40px;
+            height: 40px;
+            font-style: 18px;
+            position: relative;
+            cursor: move;
+        }
+
+        .login-title span {
+            position: absolute;
+            font-style: 12px;
+            right: -20px;
+            top: -30px;
+            background: #ffffff;
+            border: #ebebeb solid 1px;
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+        }
+
+        .login-input-content {
+            margin-top: 20px;
+        }
+
+        .login-input input.list-input {
+            float: left;
+            line-height: 35px;
+            height: 35px;
+            width: 350px;
+            border: #ebebeb solid 1px;
+            text-indent: 5px;
+        }
+
+        .login-input {
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .login-input label {
+            float: left;
+            width: 90px;
+            padding-right: 10px;
+            text-align: right;
+            line-height: 35px;
+            height: 35px;
+            font-style: 14px;
+        }
+
+        .login-button {
+            width: 50%;
+            margin: 30px auto 0px auto;
+            line-height: 40px;
+            font-style: 14px;
+            border: #ebebeb 1px solid;
+            text-align: center;
+        }
+
+        .login-bg {
+            display: none;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            background: #e2e2e2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000000;
+        }
+    </style>
+    <script>
+        var login = document.querySelector('.login');
+        var mask = document.querySelector('.login-bg');
+        var close = document.querySelector('#closeBtn');
+        var link = document.querySelector('#link');
+        var title = document.querySelector('#title');
+        close.addEventListener('click', function () {
+            login.style.display = 'none';
+            mask.style.display = 'none';
+        })
+        link.addEventListener('click', function () {
+            login.style.display = 'block';
+            mask.style.display = 'block';
+        })
+        //拖拽效果
+        // 1.当鼠标按下时，获得鼠标在盒子内的坐标
+        title.addEventListener('mousedown', function (e) {
+            var x = e.pageX - login.offsetLeft;
+            var y = e.pageY - login.offsetTop;
+            // 2.鼠标移动时,把鼠标在页面中的坐标,减去在盒子内的坐标就是模态框的left和top值
+            document.addEventListener('mousemove', move)
+            function move(e) {
+                login.style.left = e.pageX - x + 'px';
+                login.style.top = e.pageY - y + 'px';
+            }
+            // 3.鼠标弹起,移除鼠标移动事件
+            document.addEventListener('mouseup', function () {
+                document.removeEventListener('mousemove', move)
+            })
+        })
+
+        const address = new Promise((resolve, reject) => {
+            $.ajax({
+                url: 'https://c4.atonal.cloud/main/Index/AjaxText',
+                dataType: 'json',
+                success(res) {
+                    resolve(res)
+                },
+                error(err) {
+                    reject(err)
+                }
+            }).then(
+                value => {
+                    console.log(value);
+                }
+            )
+        });
+    </script>
+</body>
+
+</html>

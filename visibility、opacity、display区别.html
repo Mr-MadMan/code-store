@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>visibility、opacity、display区别</title>
+</head>
+
+<body>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      /* margin: 100px; */
+      /* background-color: #8080ff; */
+    }
+
+    .box1 {
+      display: none;
+    }
+
+    .box2 {
+      visibility: hidden;
+    }
+
+    .box3 {
+      opacity: 0;
+    }
+
+    .box4 {
+      opacity: 1;
+    }
+
+    .box5 {
+      border-bottom: 2px solid #8080c0;
+      /* border-bottom-color: #8080c0; */
+      /* box-shadow: inset 1px -1px 0 0 #3816be; */
+      height: 2px;
+      background-color: #8080c0;
+    }
+
+    .parent {
+      border: solid 5px;
+      width: 300px;
+    }
+
+    .child:nth-child(1) {
+      height: 100px;
+      width: 100px;
+      background-color: yellow;
+      float: left;
+    }
+
+    .child:nth-child(2) {
+      height: 100px;
+      width: 100px;
+      background-color: red;
+      float: left;
+    }
+
+    .child:nth-child(3) {
+      height: 100px;
+      width: 100px;
+      background-color: greenyellow;
+      float: left;
+    }
+
+    .box6 {
+      /* display: inline-block; */
+      background-color: red;
+      overflow: hidden;
+    }
+
+    .box6 .box7 {
+      background-color: green;
+      margin-top: 10px;
+    }
+  </style>
+  <div class="box1" onclick="tap(event)">
+    <div class="box4"></div>
+  </div>
+  <div class="box2" onclick="tap(event)">
+  </div>
+  <div class="box3" onclick="tap(event)">
+    <div class="box4"></div>
+  </div>
+  <div class="box5"></div>
+  <div class="parent">
+    <div class="child"></div>
+    <div class="child"></div>
+    <div class="child"></div>
+    <div style="clear: both"></div>
+  </div>
+  <div class="box6">
+    <div class="box7"></div>
+  </div>
+  <section id="layout">
+    <style>
+      #layout {
+        background: red;
+      }
+
+      #layout .left {
+        float: left;
+        width: 100px;
+        height: 100px;
+        background: pink;
+      }
+
+      /* 创建了一个bfc */
+      #layout .right {
+        height: 110px;
+        background: #ccc;
+        overflow: auto
+      }
+    </style>
+    <!--左边宽度固定，右边自适应-->
+    <div class="left">左</div>
+    <div class="right">右</div>
+  </section>
+  <script>
+    function tap(e) {
+      console.log(e);
+    }
+
+    function Man(uname, sex) {
+      this.name = uname;
+      this.sex = sex;
+    }
+
+    Man.prototype = {
+      constructor: Man,
+      fck: function () {
+        console.log('gan');
+      },
+      talk: function () {
+        console.log('shuo');
+      }
+    }
+    var m = new Man('李某', '男');
+
+    var that;
+    Man.prototype.speak = function () {
+      console.log('speak')
+      that = this;
+    }
+    Man.prototype.talk = {
+      aa: 'a'
+    }
+
+    let obj = { a: 1, b: 2, c: { d: 3, e: 4 } }
+    let obj1 = { ...obj }
+    const clonePerson = JSON.parse(JSON.stringify(obj))
+    const obj3 = obj
+    const obj4 = Object.assign({}, obj)
+    console.log(obj1 === obj);  //false
+    console.log(obj === clonePerson);
+    console.log(obj3 === obj);
+    console.log(obj4 === obj);  //false
+
+    obj1.c.d = 2
+    console.log(obj, obj1);
+    console.log(obj1 === obj);
+
+
+    Object.defineProperty(obj, 'b', {
+      configurable: false
+    })
+
+    delete obj.b
+    console.log(obj);
+
+  </script>
+</body>
+
+</html>

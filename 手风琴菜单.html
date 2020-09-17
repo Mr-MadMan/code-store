@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+  <title>手风琴式菜单</title>
+</head>
+
+<body>
+  <div class="box">
+    <div class="box-item">
+      <p class="title">Account</p>
+      <ul>
+        <li>I</li>
+        <li>Luv</li>
+        <li>U</li>
+      </ul>
+    </div>
+    <div class="box-item">
+      <p class="title">Password</p>
+      <ul>
+        <li>I</li>
+        <li>Luv</li>
+        <li>U</li>
+      </ul>
+    </div>
+    <div class="box-item">
+      <p class="title">List</p>
+      <ul>
+        <li>I</li>
+        <li>Luv</li>
+        <li>U</li>
+      </ul>
+    </div>
+  </div>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #8080c0;
+    }
+
+    .box {
+      width: 20%;
+      margin: 200px auto;
+      background-color: #a7bada;
+      color: azure;
+      cursor: default;
+    }
+
+    .box .box-item {
+      border-bottom: 1px solid #cfcfcf;
+    }
+
+    .title {
+      padding: 15px;
+      text-align: center;
+    }
+
+    ul {
+      background-color: #829dc6;
+      height: 0;
+      overflow: hidden;
+      transition: all .5s ease;
+      padding-left: 30px
+    }
+
+    .box:hover .box-item:hover ul {
+      height: 100px;
+    }
+
+    ul li {
+      list-style: none;
+      margin-top: 5px;
+    }
+
+    ul li:hover {
+      color: #cfcfcf;
+    }
+  </style>
+</body>
+
+</html>

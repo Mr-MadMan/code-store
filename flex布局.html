@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>flex布局</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .no1 {
+      display: flex;
+      width: 800px;
+      height: 400px;
+      background-color: #c0c0c0;
+      /* 换行 */
+      flex-flow: row wrap;
+      justify-content: center;
+      align-content: center;
+      margin: 0 auto;
+    }
+
+    .no1 span {
+      text-align: center;
+      line-height: 100px;
+      width: 200px;
+      height: 100px;
+      background-color: #8080c0;
+      color: #ffffff;
+      margin: 10px;
+    }
+
+    .flx {
+      display: flex;
+      width: 60%;
+      height: 300px;
+      background-color: #808080;
+      margin: 300px auto;
+    }
+
+    .flx div:nth-child(1) {
+      width: 100px;
+      background-color: #8000ff;
+    }
+
+    .flx div:nth-child(2) {
+      flex: 2;
+      background-color: #ff80c0;
+    }
+
+    .flx div:nth-child(3) {
+      flex: 1;
+      background-color: #ec2d40;
+    }
+
+    .flx div:nth-child(4) {
+      width: 100px;
+      background-color: #8080ff;
+    }
+
+    p {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-content: center;
+      width: 60%;
+      height: 300px;
+      background-color: #800080;
+      margin: 200px auto;
+    }
+
+    p span {
+      margin: 10px;
+      width: 150px;
+      height: 100px;
+    }
+
+    p span:nth-child(2) {
+      flex: 2;
+      order: -1;
+      background-color: #408080;
+    }
+
+    p span:nth-child(3) {
+      order: -1;
+      background-color: #000080;
+    }
+
+    .fakeSelector {
+      position: relative;
+      width: 300px;
+      height: 50px;
+      border: 2px solid #6368d1;
+      border-radius: 20px;
+      margin: 200px auto;
+      transition: all .2s ease;
+      font: 25px sans-serif;
+      cursor: pointer;
+    }
+
+    .fakeSelector span {
+      position: absolute;
+      line-height: 50px;
+      right: 25px;
+      transition: all .3s ease;
+      transform: rotate(90deg);
+    }
+
+    .fakeSelector span:hover {
+      transform: rotate(0deg);
+    }
+
+    .fakeSelector span::after {
+      content: '↓';
+    }
+
+    .scroll {
+      position: absolute;
+      overflow: hidden;
+      width: 300px;
+      max-height: 0;
+      margin-top: 53px;
+      border: 2px solid #8080ff;
+      border-radius: 5px;
+      transition: all .5s ease;
+    }
+
+    .scrollDown {
+      max-height: 100px;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="no1">
+    <span>U</span>
+    <span>Are</span>
+    <span>My</span>
+    <span>Goddamn</span>
+    <span>adorable</span>
+    <span>Princess</span>
+  </div>
+  <div class="flx">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <p>
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+  </p>
+
+  <div class="fakeSelector">
+    <span></span>
+    <div class="scroll">abc</div>
+  </div>
+  <div class="tex">
+    <p>pop it</p>
+  </div>
+  <section>
+    <option value="cacac">asdd</option>
+  </section>
+
+  <div id="box" style="width: 80px;height: 80px;"></div>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+  <script>
+    // 等待页面DOM加载完毕再执行js代码
+    // 原生JS和JQuery入口函数的加载模式不同
+    // 原生JS会等到DOM元素加载完毕，并且图片也加载完才会执行
+    // JQuery会等到DOM元素加载完毕，但不会等到图片也加载完毕才执行
+    // $(function () {
+    //     var div = $('.fakeSelector');
+    //     console.log(div.width());
+    //     var img = $('img');
+    //     console.log(img.width());
+
+    // })
+    var nb = jQuery.noConflict();
+    nb(function () {
+      var p = nb('.tex p')
+      console.log(p[0]);
+      var arr = { 'a': 1, 'b': 2, 'c': 3, length: 6 };
+      var map1 = nb.map(arr, function (index, value) {
+        console.log(value, index);
+        return value + index;
+      });
+      console.log(map1);
+      var map2 = nb.each(arr, function (a, b) {
+        console.log(a, b);
+        return a + b;
+      })
+      console.log(map2);
+
+    });
+    window.addEventListener('load', function () {
+      var scrollDown = document.querySelector('.fakeSelector span');
+      var scroll = document.querySelector('.scroll');
+      scrollDown.addEventListener('click', function () {
+        scroll.classList.toggle('scrollDown');
+        if (scroll.classList.contains('scrollDown')) {
+          setTimeout(() => {
+            scroll.style.overflow = 'visible';
+          }, 500);
+        } else {
+          scroll.style.overflow = 'hidden';
+        }
+      })
+    });
+  </script>
+</body>
+
+</html>

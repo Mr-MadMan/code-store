@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>隐藏切换侧边栏</title>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script> -->
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="sidebar">
+    <ul>
+      <li><a href="#" class="fa fa-battery-0">
+        </a></li>
+      <li><a href="#" class="fa fa-battery-1">
+        </a></li>
+      <li><a href="#" class="fa fa-battery-2">
+        </a></li>
+      <li><a href="#" class="fa fa-battery-3">
+        </a></li>
+      <li><a href="#" class="fa fa-battery-4">
+        </a></li>
+      <li><a href="#" class="fa fa-code">
+        </a></li>
+    </ul>
+  </div>
+  <a href="#" class="btn"></a>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: sans-serif;
+    }
+
+    .sidebar {
+      float: left;
+      width: 100px;
+      margin-left: -100px;
+      height: 100%;
+      background: #596275;
+      overflow: hidden;
+      transition: all .8s;
+    }
+
+    .side {
+      margin-left: 0;
+    }
+
+    .sidebar ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      list-style: none;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      height: 80px;
+      width: 100%;
+      font-size: 40px;
+      line-height: 80px;
+      display: block;
+      text-align: center;
+      transition: 0.6s all;
+    }
+
+    .sidebar ul li a:hover {
+      background: #34495e;
+    }
+
+    .btn {
+      float: left;
+      margin: 20px 0 0 20px;
+      padding: 0 10px;
+      font-size: 40px;
+      text-decoration: none;
+      color: #2c3e50;
+      cursor: pointer;
+      /* 此处必须添加字体引用 */
+      font-family: FontAwesome;
+      transition: .8s all;
+    }
+
+    .btn:before {
+      content: "\f105";
+    }
+
+    .btnc:before {
+      content: "\f104";
+    }
+  </style>
+  <script>
+    $('.btn').click(function () {
+      $('.btn').toggleClass('btnc');
+      $('.sidebar').toggleClass('side');
+    })
+  </script>
+</body>
+
+</html>

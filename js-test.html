@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>js-test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    // var myName = prompt('How old are you?');
+    // console.log(String(myName));
+    // var double = num => num*3
+    // console.log(double(3)); 
+
+    /* 菱形打印 */
+
+    // for(var i = 0; i < 6; i++){
+    //     for(var k=5; i<k ;k--){
+    //         document.write('&nbsp;');
+    //     }         
+    //     for(var j = 0; j < i; j++){
+    //         document.write('*');
+    //     }
+    //     document.write('</br>');
+    // }
+    // for(var l=0 ;l<5; l++){
+    //     for(var m=0;m<=l;m++){
+    //         document.write('&nbsp;');
+    //     }
+    //     for(var n=4;l<n;n--){
+    //         document.write('*');
+    //     }
+    //     document.write('</br>');
+    // } 
+
+    var double = num => num * 3;
+    document.write(double(3));
+
+    // var input = parseInt(prompt('请输入桌子数'));
+    // var num = new Array(3);
+
+    // for (let i = 0; i < input; i++) {
+    //     num[i] = parseInt(prompt('请输入气球数'));
+    //     console.log(num[i]);
+
+    //     num.sort();
+
+    //     if(num[2]/2>=num[0]+num[1]){
+    //         console.log(num[0]+num[1]);
+    //     }else{
+    //         console.log((num[0]+num[1]+num[3])/3);
+    //     }
+    // }
+
+    var b = 3;
+    (function () {
+      b = 5;
+      var b = 2;
+    })();
+    // console.log(b);   b=3 执行完括号里的函数后，b被释放，
+
+
+    //这里的闭包函数括号中的b皆为形参，最后一个b传到闭包函数内
+    var b = 3;
+    (function b() {
+      var b = 5;
+      console.log(b);
+    })(b)  //等价于var b = 3; var b = 5; console.log(b)
+
+
+
+
+    // var arr = ['red','green','blue','pink'];
+    // var str = '';
+    // for(var i = 0; i<arr.length ;i++){
+    //     str += arr[i]+'|';
+    // }
+    //     console.log(str);
+
+    //三目运算符
+    function getMax(num1, num2) {
+      return num1 > num2 ? num1 : num2;
+    }
+
+    // function isRY(year) {
+    //     var day = 0;
+    //     var year1 = '';
+    //     if (year  % 4 == 0 && year % 100 != 0 || year % 400 == 0 ){
+    //         year1 = '今年是闰年2月份有';
+    //         day = 29;
+    //     }else{
+    //         year1 = '今年是平年2月份有';
+    //         day = 28;
+    //     }
+    //     return [year1+day];
+    // }
+    // console.log(isRY(1999));
+
+    //利用set伪数组的元素唯一性
+    // const arr = [5,2,0,1,3,1,4];
+    // let set = [...new Set(arr)].sort((a,b)=>{return a-b});
+    // console.log(set);
+
+
+    function Man(uname, age, sex) {
+      this.name = uname;
+      this.age = age;
+      this.sex = sex;
+      this.fck = function (action) {
+        console.log(action);
+      }
+    }
+    var man = new Man('man', 21, '男');
+    man.fck('fuck me');
+    //构造函数名字首字母大写
+    //构造函数不需要return即可返回结果
+
+    // for (var k in man){
+    // 	console.log(k);
+    //     console.log(man[k]);
+    // }
+
+
+    function Car(weight, color, brand) {
+      this.weight = weight;
+      this.color = color;
+      this.brand = brand;
+      this.zaiRen = function (ZR) {
+        console.log('载人');
+      }
+      this.laHuo = function (LH) {
+        console.log('拉货');
+      }
+      this.gengTian = function (GT) {
+        console.log('耕田');
+      }
+    }
+    var car = new Car('2tun', 'blue', 'Benz');
+    // for (var c in car){
+    //     console.log(c);
+    //     console.log(car[c]);
+
+    // }
+
+    function getRandomNum(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    // console.log(getRandomNum(1,6));
+    var arr = new Array(['李四', '王五', '张三', '李兰']);  //数组对象
+    var arr1 = ['李四', '王五', '张三', '李兰'];
+    // console.log(arr);
+    // console.log(arr1);
+
+    // console.log(arr[getRandomNum(0,3)]);
+    // console.log(arr1[getRandomNum(0,3)]); 
+
+    // var random = getRandomNum(1,50);
+    // var times = 1;
+    // while(times <= 5){
+    //     var num = prompt('输入一个1~50的一个数字');
+    //     if(num < random){
+    //         alert('你猜小了');
+    //     }else if(num > random){ 
+    //         alert('你猜大了');
+    //     }else{
+    //         alert('猜对了！');
+    //         break;
+    //     }
+    //     alert('还剩'+(5-times)+'次机会');
+    //     ++times;
+    // }
+
+    // var date = new Date(2018,3,23);   //月份从0开始
+    // console.log(date);
+
+    //使用map函数替代其中数组元素
+    var rooms = ['H1', 'H2', 'H3'];
+    var newRooms = rooms.map(function (rm) {
+      if (rm === 'H3') {
+        return 'H4';
+      } else {
+        return rm;
+      }
+    });
+
+    var num = 10;
+    function fn() {
+      console.log(num);
+      var num = 20;
+      console.log(num);
+    }
+    fn();  
+  </script>
+</head>
+
+<body>
+  <ul class="ulName">
+    <li>over it</li>
+    <li>overdoes</li>
+    <li>pop it</li>
+    <li>Murder on the BEATS so it's no nice</li>
+  </ul>
+  <button class="del">delete</button>
+  <p>
+    It's lit
+    <span>straight up</span>
+  </p>
+  <div class="box">
+    <label>密码框：</label>
+    <input type="password" value="password" maxlength="11" id='input'>
+    <img src="img/view_off.png" alt="" id="img">
+  </div>
+  <button class="switchClass">switch</button>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          <input type="checkbox" id="selectAll">
+        </th>
+        <th>商品</th>
+        <th>价钱</th>
+      </tr>
+    </thead>
+    <tbody id="select">
+      <tr>
+        <td>
+          <input type="checkbox">
+        </td>
+        <td>iphone8</td>
+        <td>8000</td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox">
+        </td>
+        <td>iPad Pro</td>
+        <td>5000</td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox">
+        </td>
+        <td>Apple Watch</td>
+        <td>3000</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="tab">
+    <div class="tab_list">
+      <ul>
+        <li class="current">商品介绍</li>
+        <li>规格与包装</li>
+        <li>售后保障</li>
+        <li>商品评价</li>
+        <li>手机社区</li>
+      </ul>
+    </div>
+    <div class="tab_cont" data-name="name">
+      <div class="item" style="display: block;">商品介绍模块内容</div>
+      <div class="item">规格与包装模块内容</div>
+      <div class="item">售后保障模块内容</div>
+      <div class="item">商品评价模块内容</div>
+      <div class="item">手机社区模块内容</div>
+    </div>
+  </div>
+  <ul class="nav">
+    <li>
+      <a href="#">微博</a>
+      <ul>
+        <li>
+          <a href="">私信</a>
+        </li>
+        <li>
+          <a href="">评论</a>
+        </li>
+        <li>
+          <a href="">@我</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">微博</a>
+      <ul>
+        <li>
+          <a href="">私信</a>
+        </li>
+        <li>
+          <a href="">评论</a>
+        </li>
+        <li>
+          <a href="">@我</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">微博</a>
+      <ul>
+        <li>
+          <a href="">私信</a>
+        </li>
+        <li>
+          <a href="">评论</a>
+        </li>
+        <li>
+          <a href="">@我</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <textarea name="" id=""></textarea>
+  <button class="btn">publish</button>
+  <ul class="ulTest">
+
+  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th>姓名</th>
+        <th>科目</th>
+        <th>成绩</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody class="tb">
+
+    </tbody>
+  </table>
+  <div class="inside"></div>
+  <div class="father">
+    <div class="son">son box</div>
+  </div>
+  <div>
+    <div class="show">show</div>
+    <input class="inputWrap" type="text" value="请输入">
+  </div>
+  <div class="countdownBox">
+    <span class="hour">1</span>
+    <span class="minute">2</span>
+    <span class="seconds">3</span>
+  </div>
+  <button class="countDownBtn">click me </button>
+  <div class="directShow"></div>
+
+  <button id="a">click</button>
+  <button id="a">click</button>
+  <button id="a">click</button>
+
+  <div class="box-test1">
+    <div class="box-test2"></div>
+  </div>
+  <!-- 
+    都是类选择器，所以优先级相等
+    在优先级相等的情况下，下面的会覆盖上面的样式【代表从上向下执行】
+    这个题如果把style中的classA和classB换一下位置，最终颜色就是蓝色。 
+  -->
+  <p class="classB classA">hello</p>
+
+  <!-- jQuery实现获取复选框 -->
+  <ul id="fruit">
+    <li><input type="checkbox" value="0001" />苹果</li>
+    <li><input type="checkbox" value="0002" />梨子</li>
+    <li><input type="checkbox" value="0003" />芒果</li>
+    <li><input type="checkbox" value="0004" />山楂</li>
+    <li><input type="checkbox" value="0005" />香蕉</li>
+  </ul>
+  <input type="checkbox" id="All" />
+  <style>
+    .classA {
+      color: blue;
+    }
+
+    .classB {
+      color: red;
+    }
+
+    .box {
+      position: relative;
+      width: 300px;
+      border-bottom: 1px solid #cacaca;
+      margin: 20px;
+    }
+
+    .box input {
+      width: 250px;
+      height: 30px;
+      border: 0;
+      outline: none;
+    }
+
+    .box img {
+      position: absolute;
+      right: 20px;
+      top: 8px;
+    }
+
+    .box div {
+      position: absolute;
+      left: 20px;
+      top: 5px;
+    }
+
+    .current {
+      background: #8080c0;
+    }
+
+    .item {
+      display: none;
+    }
+
+    .nav ul {
+      display: none;
+      /* position: absolute;
+            top: 41px;
+            left: 0;
+            width: 100%;
+            border-left: 1px solid #cfcfcf;
+            border-right: 1px solid #cfcfcf; */
+    }
+
+    .liTest {
+      background: pink;
+      color: #8080c0;
+      width: 250px;
+      margin: 15px 0;
+    }
+
+    .liTest a {
+      float: right;
+    }
+
+    .tb td {
+      border: 1px solid #000000;
+    }
+
+    .show {
+      display: none;
+    }
+
+    .countdownBox {
+      display: flex;
+      flex-direction: row;
+      margin-top: 30px;
+    }
+
+    .hour {
+      display: flex;
+      width: 20px;
+      height: 20px;
+      background: #8080c0;
+      color: #c0c0c0;
+      justify-content: center;
+    }
+
+    .minute {
+      display: flex;
+      width: 20px;
+      height: 20px;
+      background: #8080c0;
+      color: #c0c0c0;
+      justify-content: center;
+    }
+
+    .seconds {
+      display: flex;
+      width: 20px;
+      height: 20px;
+      background: #8080c0;
+      color: #c0c0c0;
+      justify-content: center;
+    }
+
+    button {
+      outline-width: 0;
+      background: #8080c0;
+      border-radius: 10px;
+      border: none;
+    }
+
+    /* 
+      边距塌陷
+      上边距塌陷的盒子设置border padding bfc则不会产生塌陷
+     */
+    .box-test1 {
+      box-sizing: content-box;
+      width: 200px;
+      height: 200px;
+      /* border: 2px solid #000000; */
+      background-color: #ff0000;
+      margin-top: 20px;
+      padding: 10px 0;
+    }
+
+    .box-test2 {
+      box-sizing: border-box;
+      width: 100px;
+      height: 100px;
+      /* border: 1px solid #000000; */
+      background-color: #ff80c0;
+      margin-top: 10px
+    }
+  </style>
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+    var spanGet = document.querySelector('span');
+    spanGet.onclick = function () {
+      // spanGet.innerText = 'shit';  
+      this.innerText = 'shit';  //this指向的是事件函数调用者 
+    }
+    var input = document.getElementById('input');
+    var img = document.getElementById('img');
+    var flag = 0;
+    img.onclick = function () {
+      if (flag == 0) {
+        input.type = 'text';
+        this.src = 'img/view.png';
+        flag = 1;
+        // 行内样式设置
+        // input.style.backgroundColor = 'pink';
+      } else {
+        input.type = 'password'
+        this.src = 'img/view_off.png';
+        flag = 0;
+        // input.style.backgroundColor = 'purple';
+      }
+    }
+
+    input.onfocus = function () {
+      if (this.value == 'password') {
+        this.value = '';
+      }
+      this.style.color = '#000';
+    }
+    input.onblur = function () {
+      if (this.value == '' || this.value == '/^[ ]+$/') {
+        this.value = 'password'
+      }
+      this.style.color = '#cfcfcf'
+    }
+    var box = document.querySelector('.box');
+    box.onclick = function () {
+      this.className = 'box box1';
+    }
+
+    // var btn = document.getElementsByTagName('button')[0];
+    var btn = document.querySelector('.switchClass');
+    var flag = 0;
+    btn.onclick = function () {
+      if (flag == 0) {
+        document.bgColor = 'red';
+        flag = 1;
+      } else {
+        document.bgColor = 'white';
+        flag = 0;
+      }
+    }
+    var selectAll = document.querySelector('#selectAll');
+    var select = document.querySelector('#select').querySelectorAll('input');
+
+    // 利用循环给每个复选框绑定点击事件 
+    for (let i = 0; i < select.length; i++) {
+      select[i].onclick = function () {
+        var flag = true;
+        // 每次点击以下复选框要循环检查是否被选中
+        for (let i = 0; i < select.length; i++) {
+          if (!select[i].checked) {
+            flag = false;
+            break;  //只要有一个未选中，不用再循环判断
+          }
+        }
+        selectAll.checked = flag;
+      }
+    }
+    selectAll.onclick = function () {
+      for (let i = 0; i < select.length; i++) {
+        select[i].checked = this.checked;
+      }
+    }
+
+    var tableList = document.querySelector('.tab_list');
+    var lis = tableList.querySelectorAll('li');
+    var items = document.querySelectorAll('.item');
+    for (let i = 0; i < lis.length; i++) {
+      // 给5个li设置索引号，与下面显示内容绑定
+      // lis[i].setAttribute('index', i);
+      // 动态添加属性
+      lis[i].index = i;
+      lis[i].onclick = function () {
+        //重点！ 排他只留下点击的当前标签，其余的li清除class
+        for (let i = 0; i < lis.length; i++) {
+          lis[i].className = '';
+        }
+        // 留下当前点击标签
+        this.className = 'current';
+
+        // var index = this.getAttribute('index');
+        let index = lis[i].index;
+        for (let i = 0; i < items.length; i++) {
+          items[i].style.display = 'none';
+        }
+        items[index].style.display = 'block';
+      }
+    }
+
+    var nav = document.querySelector('.nav');
+    var lis1 = nav.children;
+    console.log(lis1);
+
+
+    for (let i = 0; i < lis1.length; i++) {
+      var lis2 = lis1[i].querySelectorAll('li');
+
+      lis1[i].onmouseover = function () {
+        this.children[1].style.display = 'block';
+      }
+      lis1[i].onmouseout = function () {
+        this.children[1].style.display = 'none';
+      }
+    }
+
+    var btn = document.querySelector('.btn');
+    var text = document.querySelector('textarea');
+    var comUl = document.querySelector('.ulTest');
+
+    btn.onclick = function () {
+      if (text.value == '') {
+        alert('请输入内容后发布');
+        return false;
+      } else {
+        var li = document.createElement('li');
+        li.className = "liTest";
+        // 赋值给文本框
+        li.innerHTML = text.value + "<a href='javascript:;'>删除</a>";
+        // 添加元素
+        comUl.insertBefore(li, comUl.children[0]);
+        // 删除当前链接的li 它的父亲
+        var a = document.querySelectorAll('a');
+        for (let i = 0; i < a.length; i++) {
+          a[i].onclick = function () {
+            // node.removeChild(child) 删除的是li 当前所在li this.parentNode;
+            comUl.removeChild(this.parentNode);
+          }
+        }
+      }
+    }
+
+    // 删除元素
+    var ul = document.querySelector('.ulName');
+    var del = document.querySelector('.del');
+    del.onclick = function () {
+      if (ul.children.length == 0) {
+        this.disabled = true;
+      } else {
+        ul.removeChild(ul.children[0])
+      }
+    }
+
+    var datas = [{
+      name: 'Jaden',
+      subject: 'bullshit',
+      score: 80
+    }, {
+      name: 'Jorden',
+      subject: 'bullshit',
+      score: 79
+    }, {
+      name: 'Micheal',
+      subject: 'bullshit',
+      score: 60
+    }, {
+      name: 'Mike',
+      subject: 'bullshit',
+      score: 75
+    }]
+
+    // 往tbody创建行，有几个人创建几行
+    var tbody = document.querySelector('.tb');
+    for (let i = 0; i < datas.length; i++) {  //此处按照数据数循环行数 tr
+      // 创建tr
+      var tr = document.createElement('tr');
+      tbody.appendChild(tr);
+      // 行里面创建单元格td 单元格数量取决于每个对象的属性个数 for循环遍历对象datas[i]
+      for (let k in datas[i]) {  //遍历对象里的列td
+        let td = document.createElement('td');
+        // 将对象中的属性值给td
+        td.innerHTML = datas[i][k];
+        tr.appendChild(td);
+      }
+      // 添加删除列
+      var td = document.createElement('td');
+      tr.appendChild(td);
+      td.innerHTML = "<a href='javascript:;' class='as'>删除</a>";
+    }
+    var as = document.querySelectorAll('.as');
+    for (let i = 0; i < as.length; i++) {
+      as[i].onclick = function () {
+        // 当前this指向删除链接,其父节点是当前删除链接所在操作框,爷节点是当前行
+        tbody.removeChild(this.parentNode.parentNode);
+      }
+    }
+
+    var lis3 = ul.querySelectorAll('li');
+    ul.addEventListener('click', function (e) {
+      for (let i = 0; i < lis3.length; i++) {
+        lis3[i].style.color = '';
+      }
+      e.target.style.color = 'purple';
+    })
+
+    // 检测用户是否按下s键，若按下则将光标定位到搜索框里
+    // 使用事件对象的keyCode判断按下的键
+    var input1 = document.querySelector('.inputWrap');
+    var show = document.querySelector('.show');
+    document.addEventListener('keyup', function (e) {
+      if (e.keyCode === 83) {
+        input1.focus();
+        if (input1.value == '请输入') {
+          input1.value = '';
+        }
+      }
+      // 输入框放大显示
+      show.innerHTML = input1.value;
+      show.style.display = 'block';
+    })
+    input1.addEventListener('blur', function () {
+      if (this.value == '') {
+        this.value = '请输入';
+      }
+      this.style.color = '#cfcfcf';
+      show.style.display = 'none';
+    })
+    input1.addEventListener('focus', function () {
+      if (this.value == '请输入') {
+        this.value = '';
+      }
+      this.style.color = '#000';
+    })
+
+    // var span1 = document.querySelector('.hour');
+    // var span2 = document.querySelector('.minute');
+    // var span3 = document.querySelector('.seconds');
+    // var input = +new Date('2020-1-9 18:00:00');
+    // countDown();  //加一个调用是因为第一次执行也是间隔毫秒数，刷新页面会有空白，先调用这个函数防止刷新页面有空白出现
+    // setInterval(countDown,1000);
+    // function countDown(){
+    //     var now = +new Date();
+    //     var time_ = (input - now)/1000;
+    //     var h = parseInt(time_/60/60%24);
+    //     h = h < 10 ? '0'+ h : h;
+    //     span1.innerHTML = h;
+    //     var m = parseInt(time_/60%60);
+    //     m = m < 10 ? '0' + m : m;
+    //     span2.innerHTML = m;
+    //     var s = parseInt(time_%60);
+    //     s = s < 10 ? '0' + s : s;
+    //     span3.innerHTML = s;
+    // }
+
+    // 发送验证码例子
+    var countDownBtn = document.querySelector('.countDownBtn');
+    var timeCount = 30;
+    countDownBtn.addEventListener('click', function () {
+      countDownBtn.disabled = true;
+      console.log(this);
+      var timer = setInterval(function () {
+        if (timeCount == 0) {
+          clearInterval(timer);
+          countDownBtn.disabled = false;
+          countDownBtn.innerHTML = 'click me';
+          timeCount = 60;
+        } else {
+          countDownBtn.innerHTML = '还剩下' + timeCount + '秒';
+          timeCount--;
+        }
+      }, 1000)
+    })
+
+    // 页面跳转
+    /* var div1 = document.querySelector('.directShow');
+    var timer1 = 5;
+    A();
+    var start = setInterval(() => {
+        A()
+    }, 1000);
+    countDownBtn.addEventListener('click',function(){
+        clearInterval(start);
+    })
+    function A() {
+        if (timer1 == 0) {
+            location.href = 'https://www.bilibili.com'
+        }else{
+            div1.innerHTML = '您将在'+timer1+'秒后跳转';
+            timer1--;
+        }
+    } */
+
+
+
+    /*    倒数计时效果
+
+        var d = parseInt(总秒数/60/60/24);
+        var h = parseInt(总秒数/60/60%24);
+        var m = parseInt(总秒数/60%60);
+        var s = parseInt(总秒数%60)
+    */
+    function countDown(time) {
+      var now = +new Date();
+      var input = +new Date(time);
+      var time_ = (input - now) / 1000;
+      if (time_ < 0) return '时间输入错误'
+      var y = new Date(time).getFullYear() - new Date().getFullYear()
+      var mm = parseInt(time_ / 60 / 60 / 24 % 12);
+      var d = parseInt(time_ / 60 / 60 / 24);
+      d = d < 10 ? '0' + d : d;
+      var h = parseInt(time_ / 60 / 60 % 24);
+      h = h < 10 ? '0' + h : h;
+      var m = parseInt(time_ / 60 % 60);
+      m = m < 10 ? '0' + m : m;
+      var s = parseInt(time_ % 60);
+      s = s < 10 ? '0' + s : s;
+      return `倒计时:${y}年${mm}月${d}日${h}时${h}分${s}秒`;
+    }
+    document.write(countDown("2021-12-16 16:00:00"));
+
+
+    // 数组去重
+    // var arrSort = [1, 1, 2, '1', 'xy', 'x', 'y', 9, 6, 9, 6, 3, 1, 4, 5];
+    // function newArr(arrSort) {
+    //     return Array.from(new Set(arrSort))
+    // }
+    // function unique(arrSort) {
+    //     var newArr = [];
+    //     arrSort.map((item, i) => {
+    //         // 判断数组元素没有重复的下标，即数组元素的indexof值为-1时
+    //         if (newArr.indexOf(arrSort[i]) == -1) {
+    //             newArr.push(arrSort[i])
+    //         }
+    //     }); 
+    //     // for (let i in arrSort) {
+    //     //     if (newArr.indexOf(arrSort[i]) == -1) {
+    //     //         newArr.push(arrSort[i])
+    //     //     }
+    //     // }
+    //     return newArr
+    // }
+    // console.log(unique(arrSort));
+
+    // var myFish = ['angel', 'clown', 'mandarin', , 'clown', 'sturgeon'];
+    // console.log(myFish.indexOf('clown', 2));
+
+    /*  查找字符串"abcoadffappca"中所有a出现的位置及次数 
+        核心思路：找出第一个a的位置 
+        利用indexOf()方法返回结果不为-1，则继续往后查找
+        找到第一个，索引值加一
+    */
+    var str = "abcoadffappca";
+    var index = str.indexOf('a');
+    var num = 0;
+    // 数组中找不到元素，返回-1
+    while (index != -1) {
+      index = str.indexOf('a', index + 1);
+      console.log(index);
+
+      ++num;
+    }
+
+    // while (index != -1) {
+    //     console.log(index);
+    //     var index = str.indexOf('a',index + 1);
+    //     ++num;
+    // }
+
+    /*
+        判断字符串str中出现次数最多的字符，并统计次数
+        核心思想：利用charAt()遍历这个字符串
+        把每个字符存入对象，如果没有该属性，则为1，存在+1
+        遍历对象，得到最大值和该字符
+    */
+    // var obj = {};
+    // for (let i = 0; i < str.length; i++) {
+    //     var chars = str.charAt(i);  //chars为字符串的每个字符
+    //     if (obj[chars]) {  // obj[chars]得到的是属性值
+    //         obj[chars]++;
+    //     } else {
+    //         obj[chars] = 1;
+    //     }
+    // }
+    // console.log(obj);
+    /*  返回：
+        {a: 4, b: 1, c: 2, o: 1, d: 1, …}
+        a: 4 b: 1 c: 2 d: 1 f: 2 o: 1 p: 2
+    */
+    // var strPush = [];
+    // var ch = '';
+    // var max = 0;
+    // for(var k in obj){
+    //     // k为属性名
+    //     // obj[k]得到的是属性值
+    //     // strPush.push(obj[k]);
+    //     if (obj[k] > max) {
+    //         max = obj[k];
+    //         ch = k;
+    //     }
+    // }
+    // console.log('出现最多的字符: '+ch+'\n'+'出现次数为: '+max);
+    // // console.log(Math.max(...strPush));  遍历数组取最大值
+
+    // while(str.indexOf('a') != -1){
+    //     str = str.replace('a','c');  //将字符串中的a替换为c 
+    // }f
+    // var str1 = 'red blue pink';
+    // console.log(str1.split(' ')); 
+
+    var btns = document.querySelectorAll('#a');
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', () => {
+        this.disabled = true;
+        setTimeout(function () {
+          this.disabled = false;
+        }, 3000)
+      });
+    }
+
+    // if (!('a' in window)) {
+    //     var a = 10;
+    // }
+    // console.log(a);  //undefined
+
+    // obj = {
+    //     a: 1
+    // }
+    // obj = null;
+    // obj.a;  //Cannot read property 'a' of null
+
+    // 对输入的字符串进行排序后输出
+    // 输入有两行，第一行n
+    // 第二行是n个空格隔开的字符串
+    // 5
+    // c d a bb e
+
+    // merge合并两个有序数组
+    // function merge(arr1, arr2) {
+    //     let ind1 = 0;
+    //     let ind2 = 0;
+    //     let arr = [];
+    //     while (ind1 < arr1.length && ind2 < arr2.length) {
+    //         if (arr1[ind1] <= arr2[ind2]) {
+    //             arr.push(arr1.slice(ind1, ind1 + 1)[0]);
+    //             ind1++;
+    //         } else {
+    //             arr.push(arr2.slice(ind2, ind2 + 1)[0]);
+    //             ind2++;
+    //         }
+    //     }
+    //     // 结束条件是,当任意一个数组的指针移到末尾则跳出循环,那么只需把另外一个数组没有比较完的部分直接用concat拼到新数组后面
+    //     if (ind1 < arr1.length) {
+    //         return arr.concat(arr1.splice(ind1));
+    //     } else if (ind2 < arr2.length) {
+    //         return arr.concat(arr2.splice(ind2))
+    //     } else {
+    //         return arr;
+    //     }
+    // }
+    // var arrSort = merge([1, 2, 4, 6], [5, 7, 8, 9]);
+    // console.log(arrSort);
+
+    //进制转换
+    function convert(num, jinzhi) {
+      var res = parseInt(num).toString(jinzhi);
+      console.log(res);
+    }
+    convert(5, 2)
+
+    //Fibonacci  给一个数n求最少需要多少步可以变为Fibonacci数 输入一个正整数(1,10000)  
+    // 输出一个最小的步数变为Fibonacci数
+
+    // js实现a->b,1->2,9->0加密
+    function Encrypt(aucPassword) {
+      if (aucPassword.length <= 100) {
+        var arr = aucPassword.split('');
+        var aucResult = '';
+        var temp = '';
+        for (let i = 0; i < arr.length; i++) {
+          temp = arr[i].charCodeAt() + 1;
+          aucResult = aucResult.concat(String.fromCharCode(temp));
+        }
+      }
+      return aucResult;
+    }
+
+    //解密  
+    function Dectrypt() {
+
+    }
+
+    (function () {
+      var a = 11;
+      var res = function ret() {
+        return a
+      }
+      console.log(res());
+    })();
+
+    // const p = new Promise((resolve, reject) => {  //执行器函数  同步回调
+    //     console.log('先执行执行器函数');
+    //     // resolve(1)
+    //     setTimeout(() => {
+    //         const time = Date.now()
+    //         // 若当前时间是偶数代表成功，否则失败
+    //         if (time % 2 == 0) {
+    //             // 成功则调用resolve(value)  后改变的状态(同时指定数据)，异步执行回调函数
+    //             resolve('成功的数据,time=' + time)
+    //         } else {
+    //             // 失败则调用reject(reason)
+    //             reject('失败的数据,time=' + time)
+    //         }
+    //     }, 2000);
+    // })
+
+    // setTimeout(() => {
+
+    //     p.then(
+    //         value => {
+    //             // 成功接收到的value数据  onResolved
+    //             console.log('回调成功', value);
+    //         },
+    //         reason => {
+    //             // 接收失败后的的reason数据  onRejected回调函数
+    //             console.log('回调失败', reason);
+    //         }
+    //     )
+    // }, 3000);
+
+
+    const p1 = new Promise((resolve, reject) => {
+      resolve(1)
+    })
+    const p2 = Promise.resolve(2)  //语法糖
+    const p3 = Promise.reject(3)
+
+    // p1.then(value => {
+    //     console.log(value);
+    // })
+    // p2.then(value => {
+    //     console.log(value);
+    // })
+    // p3.catch(reason => {
+    //     console.log(reason);
+    // })
+
+    const pAll = Promise.all([p1, p2, p3])
+    pAll.then(
+      values => {
+        console.log('onResolved()', values);
+      },
+      reason => {
+        console.log('onRejected()', reason);
+      }
+    )
+    // onRejected() 3
+
+    // race看谁最先完成，然后改变promise状态
+    // const pRace = Promise.race([p1, p2, p3]);
+    // pRace.then(
+    //     value => {
+    //         console.log('race onResolved()' + value);
+    //     },
+    //     reason => {
+    //         console.log('race onRejected()' + reason);
+    //     }
+    // )
+    // onResolved()1
+
+    // new Promise((resolve, reject) => {
+    //     reject(1)
+    // }).then(
+    //     value => {
+    //         console.log('onResolved状态1', value)
+    //         // return Promise.resolve(3)
+    //         throw 3;
+    //     },
+    //     reason => {
+    //         console.log('onRejected状态1', reason);
+    //         return Promise.resolve(4)
+    //         throw 4;
+    //     }
+    // ).then(
+    //     value => { console.log('onResolved状态2', value) },
+    //     reason => { console.log('onRejected状态2', reason) }
+    // )
+    /*  第一种情况：onResolved状态1 1
+                onResolved状态2 undefined
+     */
+    /* 第二种: onResolved状态1 1
+            onResolved状态2 3
+    */
+    /* 第三种: onResolved状态1 1
+            onRejected状态2 3
+    */
+
+    // new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         console.log('执行任务1(异步)');
+    //         resolve(1)
+    //     }, 1000);
+    // }).then(
+    //     value => {
+    //         console.log('任务1的结果：', value)
+    //         console.log('执行任务2(同步)')
+    //         return 2
+    //     }
+    // ).then(
+    //     value => {
+    //         console.log('任务2的结果:', value)
+    //         return new Promise((resolve, reject) => {
+    //             // 启动任务3(异步)
+    //             setTimeout(() => {
+    //                 console.log('执行任务3(异步)');
+    //                 resolve(3)
+    //             }, 1000);
+    //         })
+    //     }
+    // ).then(
+    //     value => {
+    //         console.log('任务3的结果', value);
+    //     }
+    // )
+
+    /* result:
+        执行任务1(异步)
+        任务1的结果： 1
+        执行任务2(同步)
+        任务2的结果: 2
+        执行任务3(异步)
+        任务3的结果 3
+     */
+
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(1)
+
+      })
+    }).then(
+      value => {
+        console.log('任务1的结果：', value)
+        console.log('执行任务2(同步)')
+        return 2
+      },
+      //当有异常时，还是逐级传递，省略了以下这一步
+      // reason => { throw reason }
+
+    ).then(
+      value => {
+        console.log('任务2的结果:', value)
+        return new Promise((resolve, reject) => {
+          // 启动任务3(异步)
+          setTimeout(() => {
+            console.log('执行任务3(异步)');
+            resolve(3)
+          }, 1000);
+        })
+      }
+    ).then(
+      value => {
+        console.log('任务3的结果', value);
+        () => jjj;
+      },
+      reason => {
+        console.log('onReject2()', reason);
+      }
+    ).catch(reason => {
+      console.log('onRejected1()', reason);
+      return new Promise(() => { })  //返回一个pending的promise  以下的回调函数不执行 中断promise链接
+    }).then(
+      value => {
+        console.log('onResolved3()', value);
+      },
+      reason => {
+        console.log('onRejected3()', reason);
+      }
+    )
+
+    function transformTime(timestamp) {
+      timestamp = new Date(timestamp * 1000);
+      if (timestamp) {
+        var time = new Date(timestamp);
+        var y = time.getFullYear();
+        var M = time.getMonth() + 1;
+        var d = time.getDate();
+        var h = time.getHours();
+        var m = time.getMinutes();
+        var s = time.getSeconds();
+        return y + '-' + addZero(M) + '-' + addZero(d) + ' ' + addZero(h) + ':' + addZero(m) + ':' + addZero(s);
+      } else {
+        return '';
+      }
+    }
+    function addZero(m) {
+      return m < 10 ? '0' + m : m;
+    }
+
+
+    // for (var i = 0; i < 5; i++) {
+    //     (function (i) {
+    //         setTimeout(() => {
+    //             console.log(i);
+    //         }, 1000)
+    //     })(i)
+    // }
+    // function funa() {
+    //     var s = "\na28b\tc"
+    //     for (var i = 0; i < s.length; i++);
+    //     return i
+    // }
+    // console.log(funa());
+
+    // const p = new Rectangle();
+    // console.log(typeof p);
+    // class Rectangle { }
+
+    // var total = [1, 2, 3, 4].reduce((acc, cur) => acc + cur, 5);
+    // console.log(total);
+
+    // 函数柯里化
+    // function addCurry() {
+    //     var a = 7
+    //     return function (b) {
+    //         console.log(a + b);
+    //     }
+    // }
+    // var add = addCurry()
+    // add(6)
+
+    /* 
+        两个函数都复制了rectangle对象，作为rect的默认值
+        默认值失效，按引用值传递，width+1之后，变成6
+        调用第二个函数时，没有传值，所做操作都是对默认参数，相当于复制了rectangle的值，不会影响原对象的值
+     */
+    // const rectangle = { width: 5, height: 10 }
+    // const changeWidth = (rect = { ...rectangle }) => { rect.width += 1 }
+    // const changeWH = (rect = { ...rectangle }) => {
+    //     rect.width += 1
+    //     rect.height += 1
+    // }
+    // changeWidth(rectangle)
+    // changeWH()
+    // console.log(rectangle);   //6 10
+
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => {
+        console.log(i);    //0 1 2
+      });
+    }
+
+    /*
+        object spread operator {...obj} 是浅拷贝
+        基本数据类型的值会复制，但是引用类型只会复制它的地址
+        所以这个题修改 ojb2中的 a 不会影响 obj
+        而修改b.c 则会把 obj 中的一起修改了，因为它们指向同一个对象 b
+    */
+    // var object = {
+    //     a: 1,
+    //     b: {
+    //         c: 2
+    //     }
+    // }
+    // var object2 = { ...object }
+    // object2.a = 5
+    // object2.b.c = 6
+    // console.log(object.a);    //1
+    // console.log(object.b.c);    //6
+
+
+    // var F = function () { }
+    // var f = new F()
+
+    // console.log(F.prototype);
+    // console.log(f.__proto__);
+
+    /* 
+      1、堆中属性名不能重复，属性名是字符串
+      2、数字属性名==字符串属性名
+      pb在堆中存储如右  '0':'pb content'
+      尊选原则2  obja[pb]属性值被覆盖了
+      输出'pc content'
+     */
+    // let obja = {},
+    //   pb = '0',
+    //   pc = 0;
+    // obja[pb] = 'pb content';  //相当于 obja['0'] = 'pb content';
+    // obja[pc] = 'pc content';  //opja[0] = 'pc content';
+    // console.log(obja[pb]);
+
+    /* 
+      symbol创建唯一值
+     */
+    // let obja = {},
+    //   pb = Symbol('1'),
+    //   pc = Symbol('1');
+    // obja[pb] = 'pb content';
+    // obja[pc] = 'pc content';
+    // console.log(obja[pb]);  //'pb content'
+
+    /* 
+      当属性是一个对象会被toString()方法转换为字符串[object Object]
+      所以赋值后，obja[pc]的值覆盖了obja[pb]的值
+     */
+    let obja = {},
+      pb = { a: 22 }
+    pc = {
+      m: '2'
+    };
+    obja[pb] = 'pb content';
+    obja[pc] = 'pc content';
+    console.log(obja[pb]);  //[object Object]:'pc content'
+
+    /* 
+      闭包内存不销毁
+      闭包保存和保护变量
+      test接收立即执行函数
+     */
+    // var test = (function (i) {
+    //   return function () {
+    //     alert(i *= 2)   //字符串4
+    //   }
+    // })(2)  //4
+    // test(5)
+
+    /* 
+      全局下
+        a = 0
+        b = 0
+        A = AAAFFF000  存储引用地址
+      重写了全局方法指向
+      指向第二个带有b参数的function
+      输出 1 4
+    */
+    // var a = 0, b = 0;
+    // function A(a) {
+    //   A = function (b) {
+    //     alert(a + b++)
+    //   }
+    //   alert(a++)
+    // }
+    // A(1)
+    // A(2)
+
+    /* 对象原型、原型链 */
+    // 2 4 1 1 2 3 3
+    // function Foo() {
+    //   getName = function () {
+    //     console.log(1);
+    //   }
+    //   return this;
+    // }
+    // Foo.getName = function () {
+    //   console.log(2);
+    // }
+    // Foo.prototype.getName = function () {
+    //   console.log(3);
+    // }
+    // var getName = function () {
+    //   console.log(4);
+    // }
+    // function getName() {
+    //   console.log(5);
+    // }
+    // Foo.getName()
+    // getName()  //getName在声明阶段时已被getName()->4覆盖 
+    // Foo().getName()  //Foo将全局下的getName改为func->1  return this=>window
+    // getName()
+    // new Foo.getName()   //new 函数执行也等同于普通函数执行
+    // new Foo().getName()   //执行顺序: 创建实例new Foo() => 实例.getName() 实例上的getName就是原型上的getName
+    // new new Foo().getName()
+
+    /* 
+      await同步执行，异步等待结果
+      输出为 script start > async1 start > async2 > promise1 > script end > async1 end > promise2 > setTimeOut
+      执行async2等待返回结果 await为微任务异步，有结果后往下执行
+     */
+    async function async1() {
+      console.log('async1 start');
+      await async2();
+      console.log('async1 end');
+    }
+
+    async function async2() {
+      console.log('async2');
+    }
+    console.log('script start');
+    setTimeout(() => {
+      console.log('setTimeOut');
+    }, 0);
+    async1();
+    new Promise(function (resolve) {
+      console.log('promise1');
+      resolve()
+    }).then(function () {
+      console.log('promise2');
+    })
+    console.log('script end');
+
+    /* 
+      ()优先级为20最高
+      new Func 结合属于 new 无参数列表的情况（18级）
+      new Func() 结合属于 new 有参数列表的情况（19级）
+      箭头函数不能被new成为一实例,箭头函数没有原型链
+      1 1 2 1 3 报错 
+     */
+
+    // function A() {
+    //   console.log(1);
+    // }
+    // function Func() {
+    //   A = function () {
+    //     console.log(2);
+    //   }
+    //   return this;
+    // }
+    // Func.A = A;
+    // Func.prototype = {
+    //   A: () => {
+    //     console.log(3);
+    //   }
+    // }
+    // A()
+    // Func.A()
+    // Func().A()
+    // new Func.A()
+    // /* 执行 new Func() 返回一个 Func 的对象 ，对 Func 对象调用 getName 时查找引用链，得到 Func.prototype.getName */
+    // new Func().A()
+    // new new Func().A()
+
+
+
+
+    /* 寻找数组最小值 */
+    var minArr = [100, 200, 30, 40, 50, 30]
+    // 方法1
+    var min = minArr[0];
+    minArr.forEach(item => min = item < min ? item : min)
+
+    // 方法2
+    var min1 = Math.min(...minArr)
+
+    /* 寻找数组的最小索引值 */
+    // findIndex()满足找到第一个元素位置
+    var minIndex = minArr.findIndex(item => item === min)
+    // var minIndex = minArr.indexOf(min)
+    console.log(minIndex);
+
+
+    /* 
+      防抖 单位时间内事件触发会被重置,避免事件被误触发多次
+      实现重在 clearInterval(timer) 
+      场景:避免登录按钮多次点击重复提交
+     */
+    function debounce(f, wait) {
+      let timer;
+      return (...args) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          f(...args)
+        }, wait);
+      }
+    }
+
+    /* 
+      节流 控制流量，单位时间内只能触发一次，于服务器端限流类似 
+      实现重在开锁关锁 timer = setTimeout() timer = null;
+      场景:浏览器播放事件,每一秒计算一次进度信息;input框实时搜索并发送请求展示下拉列表,每隔一秒发送一次请求
+    */
+
+    function throttle(f, wait) {
+      return (...args) => {
+        if (timer) { return }
+        timer = setTimeout(() => {
+          f(...args)
+          timer = null
+        }, wait);
+      }
+    }
+
+    // 版本号排序
+    let versionArr = "['1.32.33','2.0','1.100.0.9','0.1.21','9.3.33.1']"
+    var res = function sortArr(arr) {
+      versionArr = versionArr.substring(1, arr.length - 1)
+      let arrTmp = versionArr.split(",")
+      arrTmp.sort((a, b) => a > b ? 1 : -1)
+
+      return arrTmp
+
+    }
+    // console.log(res(versionArr));
+
+    class Publisher {
+      constructor() {
+        this.subs = []
+      }
+      listen(action) {
+        this.subs.push(action)
+      }
+      trigger() {
+        console.log(this.subs.shift());
+      }
+    }
+    class Watch extends Publisher {
+      // constructor(action) {
+      //   super()
+      //   this.action = action
+      // }
+      // trigger() {
+      //   super.trigger()
+      // }
+    }
+    var watcher = new Watch()
+    // publish.listen('eat', price => { consle.log('eat') })
+    watcher.listen('eat')
+    watcher.trigger()
+
+    function getUrlParam(sUrl, sKey) {
+      var paramArr = sUrl.split('?')[1].split('#')[0].split('&'); // 取出每个参数的键值对放入数组
+      const obj = {};
+      paramArr.forEach(element => {
+        const [key, value] = element.split('=');  // 取出数组中每一项的键与值  ES6的解构赋值
+        if (obj[key] === undefined) {   // 表示第一次遍历这个元素，直接添加到对象上面
+          obj[key] = value;
+        } else {
+          obj[key] = [].concat(obj[key], value); // 表示不是第一次遍历说明这个键已有，通过数组存起来。
+        }
+      });
+      return sKey === undefined ? obj : obj[sKey] || '';  // 如果该方法为一个参数，则返回对象。
+      //如果为两个参数，sKey存在，则返回值或数组，否则返回空字符。
+    }
+    var pp = getUrlParam('http://www.xxxxxxx.cn/?lx=1&name=JS&from=baidu')
+    console.log(pp);
+
+
+    // 转义特殊字符
+    function decodeHtml(html) {
+      let txt = document.createElement('textarea');
+      txt.innerHTML = html;
+      return txt.value;
+    }
+
+    // 伪随机数生成
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    // selector.addEventListener('click',()=>{console.log(this)})
+    $('#All').click(function () {
+      // jQuery方法里用箭头函数的话，默认this指向window 用es5写法不会出现此问题
+      if ($(this).prop('checked')) {
+        $("#fruit :checkbox").prop("checked", true);
+      } else {
+        $("#fruit :checkbox").prop("checked", false);
+      }
+    })
+
+
+  </script>
+</body>
+
+</html>

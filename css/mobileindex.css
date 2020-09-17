@@ -1,0 +1,74 @@
+.focus {
+    position: relative;
+    overflow: hidden;
+    padding-top: 44px;
+}
+
+.focus img {
+    width: 100%;
+}
+
+.focus ul {
+    overflow: hidden;
+    width: 500%;
+    margin: 0;
+    padding: 0;
+    margin-left: -100%;
+}
+
+.focus ul li {
+    float: left;
+    width: 20%;
+    list-style: none;
+}
+
+.focus ol {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    margin: 0;
+}
+
+.focus ol li {
+    /* 让元素处于一行上 */
+    display: inline-block;
+    list-style: none;
+    width: 5px;
+    height: 5px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: all .3s;
+}
+
+.focus ol li.current {
+    width: 15px;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-pagination-bullet {
+    /* 比之前样式权重高 */
+    background: #fff !important;
+}

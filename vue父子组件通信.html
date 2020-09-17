@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>父子组件通信</title>
+</head>
+
+<body>
+  <div id="a">
+    <!-- 这里要写全标签，不然不渲染 -->
+    <cpn1></cpn1>
+    <cpn :number1="num1" :number2="num2" @num1change="num1change" @num2change="num2change" :str="string()" />
+  </div>
+  <template id="cpn">
+    <div>
+      <h1>{{str}}</h1>
+      <h2>props:{{number1}}</h2>
+      <h2>data:{{dnumber1}}</h2>
+      <!--<input type="text" v-model="dnumber1">-->
+      <input type="text" :value="dnumber1" @input="num1Input">
+      <h2>props:{{number2}}</h2>
+      <h2>data:{{dnumber2}}</h2>
+      <!--<input type="text" v-model="dnumber2">-->
+      <input type="text" :value="dnumber2" @input="num2Input">
+    </div>
+  </template>
+  <template id="cpn1">
+    <div>
+      <p>this is bindData1 component!</p>
+      <button @click="handleChange">change input value</button>
+      <input type="text" :value="inputValue" @change="handleInputChange" />
+      <p>input 中的值为：{{inputValue}}</p>
+    </div>
+  </template>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#a',
+      data: {
+        num1: 1,
+        num2: 2,
+        string() {
+          console.log('jjj');
+
+        }
+      },
+      methods: {
+        // value传入的是一个string类型要做类型转换
+        num1change(value) {
+          this.num1 = parseInt(value)
+        },
+        num2change(value) {
+          this.num2 = parseInt(value)
+        }
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          props: ['number1', 'number2', 'str'],
+          // 使用v-model要改变number1和number2的值要在data中修改
+          data() {
+            return {
+              dnumber1: this.number1,
+              dnumber2: this.number2
+            }
+          },
+          methods: {
+            num1Input(e) {
+              this.dnumber1 = e.target.value;
+              // 利用emit修改父组件的值
+              this.$emit('num1change', this.dnumber1)
+            },
+            num2Input(e) {
+              this.dnumber2 = e.target.value;
+              this.$emit('num2change', this.dnumber2)
+            }
+          }
+        },
+        cpn1: {
+          template: '#cpn1',
+          data() {
+            return {
+              inputValue: 'What up'
+            }
+          },
+          methods: {
+            handleInputChange(e) {
+              this.inputValue = e.target.value
+            },
+            handleChange() {
+              this.inputValue = 'Madness'
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

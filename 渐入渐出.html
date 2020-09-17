@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- 渐进渐出效果 -->
+<html>
+
+<head>
+    <style type="text/css">
+        html,
+        body {
+            /* //写了这个后，才能在后面通过百分比设置高度，因为div是根据其上层的数据为基础设定百分比的 */
+            height: 100%;
+        }
+
+        div {
+            border-radius: 5 5 5 5;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            font-size: 50px;
+        }
+
+        .fadeInDiv {
+            filter: Alpha(opacity=50);
+            opacity: 0.5;
+            background: red;
+            width: 10%;
+            height: 100%;
+        }
+
+        .fadeOutDiv {
+            filter: Alpha(opacity=50);
+            opacity: 0.5;
+            background: blue;
+            width: 20%;
+            height: 30%;
+        }
+    </style>
+
+    <script language="javascript">
+        function isIE() {
+            if (navigator.userAgent.indexOf("MSIE") > 0) {
+                return true;
+            }
+            return false;
+        }
+
+        function fade(obj, type, speed) {
+            var INTERVAL_TIME = 50;        //setInterval的间隔时间
+            if (typeof speed == "undefined") {    //如果在调用函数时没有设置speed则设置其默认值为2
+                alert("typeof speed == 'undefined' : " + typeof speed);
+                speed = 2;
+            } else if (speed == 0 || !(/^[0-9]*$/.test(speed))) {    //如果speed为0，或者有数字以外的字符，则返回
+                return;
+            } else {        //确保speed为正数
+                speed = (speed > 0) ? speed : -(speed);
+            }
+
+            if (type == "in") {    //渐渐出现
+            } else if (type == "out") {        //type渐渐消失的话，speed改为负数
+                speed = -speed;
+            } else {
+                return;
+            }
+
+            var opa;
+            var time;
+            speed = Number(speed);
+            if (isIE()) {
+                opa = obj.style.filter;
+                //因为只有class，无法获得class中的值，其只能从默认值开始渐变
+                opa = opa ? opa.substring(opa.indexOf("=") + 1, opa.indexOf(")")) : 0;    //如果有设置filter则为其本身，否则设置其默认值为0
+                opa = Number(opa);
+                time = setInterval(function () {
+                    if (opa < 100) {
+                        opa += speed;
+                        obj.style.filter = "Alpha(opacity=" + opa + ")";
+                    } else {
+                        clearInterval(time);
+                    }
+                }, INTERVAL_TIME);
+            } else {
+                speed /= 100;
+                //opa = obj.style.filter;    //ie不支持opacity属性，支持filter属性；chrome不支持filter属性
+                //alert(opa);    //弹出框中无任何数据
+                opa = obj.style.opacity ? obj.style.opacity : 0;
+                opa = Number(opa);
+                time = setInterval(function () {
+                    if (opa < 1) {
+                        opa += speed;
+                        obj.style.opacity = opa;
+                    } else {
+                        clearInterval(time);
+                    }
+                }, INTERVAL_TIME);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="bottorn">
+        <div class="fadeInDiv" onClick="fade(this, 'in', 2)">
+            red~~
+        </div>
+    </div>
+    <div id="out" class="fadeOutDiv" style="opacity:0.5;filter:Alpha(opacity=50);" onClick="fade(this, 'out', '10')">
+        blue~~
+    </div>
+</body>
+
+</html>

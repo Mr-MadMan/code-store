@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            position: absolute;
+            top: 100px;
+            height: 200px;
+            width: 200px;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <button class="forward">向前进</button>
+    <button class="back">向后退</button>
+    <script>
+        var div = document.querySelector('div');
+        // 封装函数obj为目标对象，target为目标位置
+        // 利用属性给对象赋值，给不同元素指定了不同的定时器
+        // 缓动动画核心算法：(目标值 - 现在的位置) / 10 做为每次移动的距离 步长
+        // 函数执行完后才启动回调函数
+        function animation(obj,target,callback){
+            clearInterval(obj.timer);  //排他思想，先清除以前的定时器，只保留当前一个即可
+            obj.timer = setInterval(function(){
+                // 步长值要取整数
+                var step = (target - obj.offsetLeft) / 10;
+                // 负值往小的取，正值往大的取
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                if (obj.offsetLeft == target) {
+                    clearInterval(obj.timer);
+                    if (callback) {
+                        callback();
+                    }
+                }
+                // 每次加上这个慢慢变小的值  步长公式:(目标值 - 现在的位置) / 10
+                // 往回走时step为负值
+                obj.style.left = obj.offsetLeft + step + 'px';
+            },50)
+        }
+        var forward = document.querySelector('.forward');
+        var back = document.querySelector('.back');
+        forward.addEventListener('click',function(){
+            animation(div,500,function(){
+                div.style.background = 'blue';
+            })
+        })
+        back.addEventListener('click',function(){
+            animation(div,0,function(){
+                div.style.background = 'pink';
+            })
+        }) 
+    </script>
+</body>
+</html>

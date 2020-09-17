@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件化</title>
+</head>
+
+<body>
+  <div id="cpn">
+    <l-cpn1></l-cpn1>
+    <cpn3></cpn3>
+    <cpn2></cpn2>
+    <!-- 在props定义的属性，在组件使用时不支持驼峰命名法 -->
+    <cpn4 :cmsg-a="['c']" @item-click="cpn4Click"></cpn4>
+    <cpn1></cpn1>
+  </div>
+
+  <!-- 使用script标签将模块分离 -->
+  <!-- <script type="text/x-template" id="cpnxl">
+    <div>
+        <p>push</p>
+        <p>it</p>
+      </div>
+  </script> -->
+
+  <!-- 使用template标签 子组件模板-->
+  <template id="cpnxl">
+    <div>
+      <p>{{cmsgA}}</p>
+      <p>{{cmsg}}</p>
+      <!-- <p>{{namelist}}</p> -->
+      <button v-for="(item, index) in namelist" :key="index" @click="btnClick(item)">{{item.id}}</button>
+      <p>it</p>
+    </div>
+  </template>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    //创建组件构造器 子组件
+    const cpnL = Vue.extend({
+      template: `
+      <div>
+        <p>first</p>
+        <p>Second</p>
+      </div>
+      `
+    })
+    // 父组件
+    const cpnL1 = Vue.extend({
+      template: `
+      <div>
+        <p>Second</p>
+        <p>Third</p>
+        <l-cpn></l-cpn>
+      </div>
+      `,
+      components: {
+        lCpn: cpnL
+      }
+    })
+
+    // 注册组件(全局组件,意味着可以在多个Vue实例下使用)  param1:组建的标签名  param2:组件构造器
+    // Vue.component('l-cpn', cpnL)
+    Vue.component('cpn3', {
+      template:
+        `<div>
+          <p>{{title}}</p>
+        <p>it</p>
+    </div>`
+      ,
+      data() {
+        return {
+          title: 'pop'
+        }
+      }
+    })
+
+    Vue.component('cpn1', {
+      template: `<div>
+      <p>this is bindData1 component!</p>
+      <button @click="handleChange">change input value</button>
+      <input type="text" :value="inputValue" @input="handleInputChange" />
+      <p>input 中的值为：{{inputValue}}</p>
+    </div>`,
+      data() {
+        return {
+          inputValue: 'What up'
+        }
+      },
+      methods: {
+        handleInputChange(e) {
+          this.inputValue = e.target.value
+        },
+        handleChange() {
+          this.inputValue = 'Madness'
+        }
+      }
+    })
+    new Vue({
+      el: '#cpn',
+      data: {
+        actionList: ['run', 'eat', 'swim', 'fck']
+      },
+      methods: {
+        cpn4Click(item) {
+          console.log('cpn4Click:', item);
+        }
+      },
+      components: {
+        //lCpn -> l-cpn使用组件时的标签名 : 组件构造器
+        lCpn1: cpnL1,
+        // 注册局部组件语法糖
+        cpn2: {
+          template:
+            `<div>
+      <p>fck</p>
+      <p>it</p>
+    </div>`
+        },
+        cpn4: {
+          template: '#cpnxl',
+          // props里存的是子组件绑定的变量名
+          props: {
+            cmsg: {
+              type: Number,
+              default: 11
+            },
+            // 类型是对象或数组时，默认值必须是一个函数
+            // 当设置required属性后，组件标签中对应的属性必须赋值
+            cmsgA: {
+              type: Array,
+              default: () => ['aa', 'bb'],
+              required: true
+            }
+          },
+          data() {
+            return {
+              namelist: [
+                { id: 0, name: 'lzf', age: 18, height: 170 + 'cm' },
+                { id: 1, name: 'll', age: 21, height: 172 + 'cm' },
+                { id: 2, name: 'mm', age: 22, height: 175 + 'cm' }
+              ]
+            }
+          },
+          methods: {
+            btnClick(item) {
+              //向父组件传值，参1为事件名称，参2为传递值 自定义事件
+              this.$emit('item-click', item)
+            }
+          },
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

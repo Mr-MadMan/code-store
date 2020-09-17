@@ -1,0 +1,10 @@
+# ignore file folder
+node_modules/
+.vscode/
+font-awesome-4.7.0/
+font/
+img/
+iconfont/
+vue*/
+webpack/
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <button>next</button>
+    <div
+        style="position: relative; width:400px; height: 400px; background: rebeccapurple;box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.52);">
+        <div class="ulTest"></div>
+    </div>
+    <div class="area">
+        <div class="box"></div>
+    </div>
+    <style>
+        .ulTest {
+            background: pink;
+            width: 300px;
+            height: 300px;
+            margin: 20px;
+            padding: 20px;
+            opacity: .7;
+        }
+
+        .area {
+            height: 100px;
+        }
+
+        .box {
+            position: relative;
+            background-color: #000;
+            transition: height 1s;
+        }
+    </style>
+    <script>
+        var p = location.search.substr('1', location.search.length)
+        var arr = p.split('=');
+        var div = document.querySelector('div');
+        div.innerHTML = arr[1];
+        var b = document.querySelector('button');
+        b.addEventListener('click', function () {
+            // 重定向页面到bilibili
+            // location.assign('https://www.bilibili.com')
+            history.back();
+        })
+        var ul = document.querySelector('.ulTest');
+        console.log(ul.offsetWidth);
+        console.log(ul.offsetHeight);
+        console.log(ul.offsetLeft);
+
+        document.querySelector('.area').addEventListener('click', () => {
+            document.querySelector('.box').style.height = '100px';
+        })
+    </script>
+</body>
+
+</html>

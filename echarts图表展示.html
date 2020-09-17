@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>图表展示</title>
+</head>
+
+<body>
+  <div id="echart" style="width: 1200px;height:800px;"></div>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>
+  <script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('echart'));
+
+    // 指定图表的配置项和数据
+    var option = {
+      title: {   //标题
+        text: 'MadMan Made It',
+        x: 'right',  //标题水平方向
+        textStyle: {
+          color: '#cfcfcf',
+          fontFamily: 'sans-serif',
+          fontSize: 20
+        }
+      },
+      tooltip: {
+        trigger: 'item',
+        // axisPointer: {
+        //   type: 'cross'
+        // }
+        formatter: '{a} <br/>{b}: {c} ({d}%)'
+      },
+      legend: {  //图例
+        orient: 'vertical',
+        left: 10,
+        data: ['百度', '腾讯', '阿里', '京东', '网易']
+      },
+      // xAxis: {
+      //   data: ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
+      // },
+      // yAxis: {},
+      series: [{
+        name: '占股额',  //提示名 
+        type: 'pie',   //饼状图
+        radius: ['40%', '60%'],
+        avoidLabelOverlap: false,
+        label: {
+          show: false,
+          position: 'center'
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: '30',
+            fontWeight: 'bold'
+          }
+        },
+        data: [{ value: 10, name: '百度' },
+        { value: 40, name: '阿里' },
+        { value: 30, name: '京东' },
+        { value: 10, name: '网易' },
+        { value: 20, name: '腾讯' }],
+      }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+    // 图表响应式处理
+    window.onresize = function () {
+      myChart.resize()
+    }
+  </script>
+</body>
+
+</html>

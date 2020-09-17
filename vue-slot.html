@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>slot</title>
+</head>
+
+<body>
+  <div id="slot">
+    <cpn>
+      <!-- 这里的p标签替换了button -->
+      <!-- 若要替换slot中的一些默认项要添加slot属性，属性值为name组件中name的值 -->
+      <p slot="center">hhh</p>
+    </cpn>
+    <cpn>
+      <template v-slot="slot">
+        <span>{{slot.data.join(' - ')}}</span>
+      </template>
+    </cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <!-- slot中规定默认值 -->
+      <!-- 具名插槽使用 -->
+      <!-- <slot name="left"><button>click</button></slot>
+      <slot name="center">
+        <p>hh</p>
+      </slot>
+      <slot name="right">hehe</slot> -->
+      <slot :data="pLanguages">hehe</slot>
+    </div>
+  </template>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#slot',
+      components: {
+        cpn: {
+          template: '#cpn',
+          data() {
+            return {
+              pLanguages: ['JavaScript', 'Python', 'Swift', 'Go', 'C++']
+            }
+          },
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

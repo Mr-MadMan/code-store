@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue城市联动</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 监听点击的省份  发生变化更新市数据-->
+    <!-- vue可以绑定两个方法 解决省份变化区没有改变的联动bug -->
+    <select name="" id="" v-model="prov" @change="updateCity();updateArea()">
+      <option :value="item.name" v-for="(item,index) in districtArr" :key="index">{{item.name}}</option>
+    </select>
+    <select name="" id="" v-model="city" @change="updateArea()">
+      <option :value="item.name" v-for="(item,index) in cityArr" :key="index">{{item.name}}</option>
+    </select>
+    <select name="" id="" v-model="area" v-if="areaArr.length>0">
+      <option :value="item.name" v-for="(item,index) in areaArr" :key="index">{{item.name}}</option>
+    </select>
+  </div>
+  <script src="./node_modules/vue/dist/vue.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0-0/axios.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        districtArr: [],
+        prov: '广东省', //当前省份名
+        cityArr: [],  //市数据
+        city: '',
+        areaArr: [],
+        area: ''
+      },
+      methods: {
+        getCityData() {
+          axios({
+            url: '	https://restapi.amap.com/v3/config/district?parameters',
+            methods: 'get',
+            params: {
+              key: '28c41aa8b3d0755894bbecb24891715c',
+              subdistrict: 3,
+              extensions: 'base'
+            }
+          }).then((res) => {
+            console.log(res.data);
+            this.districtArr = res.data.districts[0].districts
+            // 让选择条处于选中态
+            this.updateCity()
+            this.updateArea()
+          }).catch((err) => {
+            console.log(err);
+          })
+        },
+        updateCity() {
+          this.districtArr.forEach(item => {
+            if (item.name === this.prov) {
+              this.cityArr = item.districts
+            }
+          });
+          this.city = this.cityArr[0].name  //市初始化
+
+        },
+        updateArea() {
+          this.cityArr.forEach(item => {
+            if (item.name === this.city) {
+              this.areaArr = item.districts
+            }
+          });
+          this.area = this.areaArr[0].name  //区初始化
+        }
+      },
+      //等dom加载完再发送请求
+      mounted() {
+        this.getCityData()
+      }
+    })
+
+  </script>
+</body>
+
+</html>

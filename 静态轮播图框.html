@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .wrap {
+            /* 子绝父相 */
+            position: relative;
+            height: 280px;
+            width: 520px;
+            margin: 200px auto;
+        }
+
+        .arrowl,
+        .arrowr {
+            /* 提取公共部分 */
+            /* 绝对定位的盒子直接给宽高，无须转换 */
+            /* 不要占有位置，随便移动位置 必须用绝对定位 */
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            top: 50%;
+            margin-top: -15px;
+            /* 黑半透明 */
+            background: rgba(0, 0, 0, .2);
+            color: #ffffff;
+            text-decoration: none;
+            line-height: 30px;
+        }
+
+        .arrowl {
+            left: 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .arrowr {
+            right: 0;
+            text-align: right;
+            border-radius: 15px 0 0 15px;
+        }
+
+        .arrowl:hover,
+        .arrowr:hover {
+            background: rgba(0, 0, 0, .4);
+        }
+
+        .circle {
+            position: absolute;
+            bottom: 15px;
+            width: 70px;
+            height: 13px;
+            left: 50%;
+            margin-left: -35px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 7px;
+        }
+
+        .circle li {
+            /* 多个块级元素在一行 用浮动定位 */
+            float: left;
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin: 3px;
+        }
+
+        /* 要注意优先级的问题 */
+        .circle .current {
+            background-color: #8080c0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <a href="" class="arrowl">&lt;</a>
+        <a href="" class="arrowr">&gt;</a>
+        <img src="img/tb.jpg" alt="">
+        <ul class="circle">
+            <li></li>
+            <li class="current"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+
+</html>

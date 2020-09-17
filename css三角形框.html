@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css三角形框</title>
+</head>
+
+<body>
+  <div class="box"></div>
+  <div class="box1"><span></span></div>
+  <div class="box3"></div>
+  <style>
+    .box {
+      margin: 100px auto;
+      width: 200px;
+      height: 100px;
+      box-shadow: 0px 0px 6px #ccc;
+      position: relative;
+      border-radius: 4px;
+    }
+
+    .box:before,
+    .box:after {
+      position: absolute;
+      content: '';
+      top: 12px;
+      overflow: hidden;
+      pointer-events: none;
+      -webkit-transform: rotate(45deg);
+      -mz-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    .box:before {
+      box-shadow: 0px 0px 6px #ccc;
+      left: -8px;
+      width: 14px;
+      height: 14px;
+      /* margin-top: 12px; */
+    }
+
+    .box:after {
+      left: -6px;
+      width: 18px;
+      height: 18px;
+      /* margin-top: 13px; */
+      background: #fff;
+      box-shadow: none;
+    }
+
+    .box1 {
+      position: relative;
+      height: 100px;
+      width: 200px;
+      background-color: #8080c0;
+      animation: rightFadeIn .3s ease-out;
+    }
+
+
+    .box1 span {
+      position: absolute;
+      width: 0;
+      height: 0;
+      /* 为了兼容性 */
+      line-height: 0;
+      font-size: 0;
+      border: 10px solid transparent;
+      border-left-color: #8080c0;
+      right: -20px;
+      top: 10px;
+    }
+
+    .box3 {
+      width: 0;
+      height: 0;
+      border: 120px solid transparent;
+      border-bottom-color: #8080c0;
+    }
+  </style>
+</body>
+
+</html>

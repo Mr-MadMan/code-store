@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>瀑布流布局实现</title>
+  <!-- <link rel="stylesheet" href="./css/waterfall-grid.css"> -->
+  <!-- <link rel="stylesheet" href="./css/waterfall-flex.css"> -->
+  <style>
+    .masonry {
+      position: relative;
+    }
+
+    .item {
+      /* 加入浮动让第一排先展示出来,不然就是按列从上往下排, */
+      float: left;
+      height: auto;
+      width: 220px;
+      padding: 6px;
+    }
+
+    .item img {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- picsum网址提供一些随机图片 -->
+  <div class="masonry">
+    <div class="item">
+      <img src="https://picsum.photos/360/460?random=1">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/520?random=2">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/420?random=3">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/420?random=4">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/480?random=5">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/500?random=6">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/500?random=7">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/400?random=8">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/440?random=9">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/420?random=10">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/500?random=11">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/460?random=12">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/480?random=13">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/440?random=14">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/420?random=15">
+    </div>
+    <div class="item">
+      <img src="https://picsum.photos/360/420?random=16">
+    </div>
+  </div>
+  <!-- js实现 -->
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+    $(window).on('load', function () {
+      waterfall()
+    })
+    function waterfall() {
+      const img = $('.item')
+      // 算出列数
+      let imgWidth = img.outerWidth()
+      let screenWidth = $(window).width()
+      let cols = parseInt(screenWidth / imgWidth)
+      // 数组存放高度
+      let hArr = []
+      // 遍历所有图片，定位图片位置
+      $.each(img, (index, item) => {
+        // 判断是否是第一行  第一行取到高度值 追加到hArr
+        let imgHeight = $(item).outerHeight();  //每一张图片高度
+        if (index < cols) {
+          hArr[index] = imgHeight
+        } else {
+          // 最小高度值
+          let minH = Math.min(...hArr)
+          // 最小高度索引
+          let mIndex = hArr.findIndex(item => item == minH)
+          $(item).css({
+            position: 'absolute',
+            top: minH + 'px',
+            left: mIndex * imgWidth + 'px'
+          })
+          // 更新最小高度的值
+          hArr[mIndex] += imgHeight
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>

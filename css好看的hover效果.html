@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css好看的hover效果</title>
+  <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <div class="sm">
+    <a href="#"><i class="fa fa-facebook"></i></a>
+    <a href="#"><i class="fa fa-twitter"></i></a>
+    <a href="#"><i class="fa fa-google"></i></a>
+    <a href="#"><i class="fa fa-git"></i></a>
+    <a href="#"><i class="fa fa-youtube"></i></a>
+  </div>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #8080c0;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sm a {
+      margin: 0 20px;
+      width: 80px;
+      line-height: 80px;
+      background-color: #fff;
+      display: inline-block;
+      border-radius: 25%;
+      box-shadow: 6px 6px 12px rgba(0, 0, 0, .15),
+        -6px -6px 12px rgba(255, 255, 255, .1);
+      overflow: hidden;
+      font-size: 28px;
+      transition: .3s linear;
+      position: relative;
+      padding: 5px;
+    }
+
+    .sm a:hover {
+      transform: scale(1.2);
+      border-radius: 50%;
+
+    }
+
+    .sm a i::before {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      line-height: 90px;
+      text-align: center;
+      background-size: 200% 200%;
+      background-position: 75% 75%;
+      top: 0;
+      left: 0;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: background .5s linear;
+    }
+
+    a:hover i::before {
+      background-position: 0% 0%;
+    }
+
+    .fa-facebook::before {
+      background-image: linear-gradient(135deg, #243daf 30%, #4848b9 50%);
+    }
+
+    .fa-google::before {
+      background-image: linear-gradient(135deg, #c52b2b 30%, #4848b9 50%)
+    }
+
+    .fa-youtube::before {
+      background-image: linear-gradient(135deg, #c52b2b 30%, #4848b9 50%)
+    }
+
+    .fa-twitter::before {
+      background-image: linear-gradient(135deg, #428fce 30%, #4848b9 50%)
+    }
+  </style>
+</body>
+
+</html>

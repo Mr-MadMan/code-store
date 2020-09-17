@@ -1,0 +1,80 @@
+/* .swiper_wrap{
+    width: 1200px;
+	margin: 0 auto;
+} */
+
+.main {
+    width: 980px;
+    height: 455px;
+    margin-left: 219px;
+    margin-top: 10px;
+}
+
+.focus {
+    position: relative;
+    width: 721px;
+    height: 455px;
+    overflow: hidden;
+}
+
+.focus ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600%;
+    padding: 0;
+}
+
+.focus ul li {
+    float: left;
+}
+
+.arrow-l, .arrow-r {
+    display: none;
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    width: 24px;
+    height: 40px;
+    background: rgba(0, 0, 0, .3);
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    font-family: 'icomoon';
+    font-size: 20px;
+    z-index: 2;
+    text-decoration: none;
+}
+
+.arrow-l {
+    left: 0;
+    border-radius: 0 15px 15px 0;
+}
+
+.arrow-r {
+    right: 0;
+    border-radius: 15px 0 0 15px;
+}
+
+.circle {
+    position: absolute;
+    bottom: 10px;
+    left: 50px;
+}
+
+.circle li {
+    list-style: none;
+    float: left;
+    width: 8px;
+    height: 8px;
+    /*background-color: #fff;*/
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    margin: 0 3px;
+    border-radius: 50%;
+    /*鼠标经过显示小手*/
+    cursor: pointer;
+}
+
+.current {
+    background-color: #fff;
+}

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>VueTest</title>
+  <script src="./node_modules/vue/dist/vue.min.js"></script>
+  <link rel="stylesheet" href="./css/tab.css">
+  <style>
+    #boxWrap {
+      width: 300px;
+      height: 300px;
+      background-color: #8080ff;
+    }
+
+    .bgc1 {
+      width: 300px;
+      height: 300px;
+      background-color: red;
+    }
+
+    .bgc2 {
+      width: 300px;
+      height: 300px;
+      background-color: purple;
+    }
+
+    .current {
+      color: red;
+    }
+
+    #ul {
+      margin: 20px auto;
+      width: 300px;
+      text-align: center;
+    }
+
+    #ul li {
+      list-style: none;
+      cursor: pointer;
+    }
+
+    #ul li:hover {
+      color: #8080ff;
+    }
+
+
+    .active {
+      color: #8080ff;
+    }
+
+    .text-danger {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="a" v-if="isTrue">
+    <ul v-for="char in list">{{char}}</ul>
+    <!-- 条件渲染 -->
+    <p v-if="b < 14">small</p>
+    <p v-else-if="b > 14">big</p>
+    <p v-else>bingo</p>
+
+    <div id="boxWrap" v-show="isShow"></div>
+    <button @click="switchShow">Click</button>
+    <div v-for="(content,i) of testObj">{{i}}-{{content.id}}-{{content.name}}</div>
+    <p v-html="url"></p>
+    <h2 :class="classN" @click="toggle"></h2>
+    <!-- <h3 :class="{bgc1:isAct,bgc2:isActive}" @click="toggle"></h3> -->
+
+    <!-- 利用表达式动态绑定 -->
+    <!-- <input type="text" @input="msg=$event.target.value" v-model.lazy="msg"> -->
+    <label for="check">
+      <input type="checkbox" id="check" v-model="isCheck">lisence
+    </label>
+    <button :disabled="!isCheck">next</button>
+    <input type="checkbox" id="jack" value="jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="john" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <h4>{{checkedNames}}</h4>
+
+    <!-- 动态值绑定 -->
+    <label :for="index" v-for="(item, index) in hobbiesList" :key="index">
+      <input type="checkbox" :value="item" :id="index" v-model="hobbies">{{index}}--{{item}}
+    </label>
+    <h4>{{hobbies}}</h4>
+
+    <!-- lazy修饰符可以让数据失去焦点或回车时才更新 -->
+    <input type="text" v-model.lazy="msg">
+    <p>{{msg}}</p>
+    <!-- input类型转换 修饰符:number-->
+    <input type="text" v-model.number="num">
+    <h4>{{typeof num}}</h4>
+    <!-- 修饰符:trim 剥除空格 -->
+    <input type="text" v-model.trim="trimT">
+    <h4>{{trimT}}</h4>
+
+  </div>
+  <div class="tabsbox" id="tab">
+    <!-- tab 标签 -->
+    <nav class="fisrstnav">
+      <ul>
+        <li class="liactive" @click="tabChange"><span data-id="1">测试1</span><span class="iconfont icon-guanbi"></span>
+        </li>
+        <li @click="tabChange"><span data-id="2">测试2</span><span class="iconfont icon-guanbi"></span></li>
+        <li @click="tabChange"><span data-id="3">测试3</span><span class="iconfont icon-guanbi"></span></li>
+      </ul>
+      <div class="tabadd">
+        <span>+</span>
+      </div>
+    </nav>
+
+    <!-- tab 内容 -->
+    <div>
+      <section class="conactive" v-if="tabNum==1">测试1</section>
+      <section v-else-if="tabNum==2">测试2</section>
+      <section v-else>测试3</section>
+    </div>
+  </div>
+  <div id="ul">
+    <ul>
+      <li v-for="(movies,index) in moviesList" @click="currentIndex = index;" :class="{current:currentIndex==index}">
+        {{movies}}</li>
+    </ul>
+    <!-- 样式的对象语法绑定 :style='{key(属性名):value(属性值)}' -->
+    <!-- 20px若不加引号vue会将其作为一个变量解析 -->
+    <!-- 驼峰命名可不加引号fontSize：'20px' -->
+    <h2 :style="baseStyle">Hello</h2>
+    <!-- 计算属性调用不加括号 -->
+    <p>总价格:{{priceTotal}}</p>
+
+    <p>{{nameContact}}</p>
+    <!-- class绑定的对象语法 -->
+    <div :class="[isActive ? activeClass :errorClass]" v-on:click="isActive=!isActive" style="cursor: pointer;">
+      sad</div>
+
+    <!-- 在事件定义中，若调用的函数需要参数，这个时候Vue会默认将浏览器产生的event事件对象作为参数传入到方法中 -->
+    <button @click="btnClick" @mousedown="mousedown" @mouseup="mouseup" ref="longPressBtn">btn2</button>
+    <input type="text" v-model="inputval" ref="reference">
+  </div>
+
+</body>
+<script>
+  var a = new Vue({
+    el: '#a',
+    data: {
+      msg: 'fck',
+      list: ['f', 'u', 'c', 'k'],
+      isTrue: true,
+      isShow: true,
+      b: -32,
+      testObj: [{ id: 0, name: 'Ka' }, { id: 1, name: 'Q' }, { id: 1, name: 'yin' }],
+      url: '<a href="https://www.baidu.com">百度一下</a>',
+      isActive: true,
+      isAct: true,
+      classN: { bgc1: true, bgc2: true },
+      isCheck: false,
+      checkedNames: [],
+      hobbies: [],
+      hobbiesList: ['黄', '赌', '毒'],
+      num: 0,
+      trimT: '',
+      path: 'bilibili'
+    },
+    methods: {
+      switchShow: function () {
+        console.log(this);
+        a.isShow = !a.isShow;
+      },
+      toggle: function () {
+        this.isAct = !this.isAct;
+      },
+      tabChange: function () {
+        return [this.isAct, this.isActive]
+      }
+    }
+  })
+
+  var b = new Vue({
+    el: '#tab',
+    data: {
+      tabNum: 1
+    },
+    methods: {
+      tabChange: function (e) {
+        let n = e.target.dataset.id;
+        this.tabNum = n;
+        console.log(this.tabNum);
+
+      }
+    }
+  })
+  var c = new Vue({
+    el: '#ul',
+    data: {
+      moviesList: ['肖申克的救赎', '阿飞正传', '英雄本色'],
+      firstName: 'Jhon',
+      lastName: 'Bieber',
+      currentIndex: 0,
+      baseStyle: {
+        backgroundColor: 'red',
+        fontSize: '20px'
+      },
+      priceList: [{ id: 0, name: '猪肉', price: 32 }, { id: 1, name: '牛肉', price: 40 }, { id: 3, name: '青菜', price: 5 }],
+      isActive: true,
+      activeClass: 'active',
+      errorClass: 'text-danger',
+      timer: null,
+      inputval: "MadMan made it"
+    },
+    // computed:计算属性()
+    computed: {
+      priceTotal() {
+        let priceTotal = 0;
+        // for (let item of this.priceList) {
+        //     priceTotal += item.price;
+        // }
+        this.priceList.map(i => {
+          priceTotal += i.price;
+        });
+        return priceTotal;
+      },
+      // 计算属性一般是没有set方法，只读属性
+      // nameContact(){
+      //     return this.firstName + ' ' + this.lastName;
+      // },
+      // 上面的计算属性完整写法 setter 和 getter
+      nameContact: {
+        set(newName) {
+          const nameN = newName.split(' ');
+          this.firstName = nameN[0];
+          this.lastName = nameN[1];
+        },
+        get() {
+          return this.firstName + ' ' + this.lastName;  //在操作台输入c.nameContact 返回"Jhon Bieber"
+        }
+      }
+    },
+    methods: {
+      classChange(index) {
+        this.currentIndex = index;
+      },
+      btnClick() {
+        console.log('click');
+      },
+      mousedown(e) {
+        if (this.timer === null) {
+          this.timer = setTimeout(() => {
+            console.log('mousedown');
+
+          }, 500);
+        }
+      },
+      mouseup() {
+        if (this.timer !== null) {
+          clearTimeout(this.timer)
+          this.timer = null
+          console.log('mouseup');
+
+        }
+      }
+    }
+  })
+
+
+</script>
+
+</html>

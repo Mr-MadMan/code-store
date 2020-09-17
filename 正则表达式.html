@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>正则表达式</title>
+    <script type="text/javascript" src="https://cdn.iw3c.top/jquery/jquery-3.4.1.min.js"></script>
+    <style>
+        .right {
+            color: green;
+        }
+
+        .wrong {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text"><span>请输入用户名</span>
+    <button>click</button>
+    <script>
+        var reg = new RegExp(/^[a-z]\w{5,16}$/);
+        var text = document.querySelector('input');
+        var span = document.querySelector('span');
+        text.addEventListener('blur', function () {
+            if (reg.test(this.value)) {
+                span.className = 'right';
+                span.innerHTML = '！对的 ！';
+            } else {
+                this.nextElementSibling.className = 'wrong';
+                this.nextElementSibling.innerHTML = 'wrong<i>!!</i>'  //相当于创建了一个节点 
+            }
+        })
+
+
+        // 类中this的指向问题
+        var that;
+        class Hero {
+            constructor(name) {
+                that = this;
+                // constructor 里的 this 指向的是创建的实例对象
+                this.name = name;
+                this.btn = document.querySelector('button');
+                this.btn.addEventListener('click', this.hit);
+            }
+            hit() {
+                // 该方法的this指向btn，因为这个btn调用了该函数
+                console.log(this);
+                console.log(that.name);  //that存的是constructor里的this
+            }
+        }
+        var hero = new Hero('President M');
+
+        function Human(name, sex) {
+            this.name = name;
+            this.sex = sex;
+            this.fight = function () {
+                console.log('gan');
+            }
+        }
+
+        var human = new Human('帅哥', 'man');
+        Human.age = 12;
+        console.log(human);
+
+
+
+        // function Text_ParamGet() {
+        //     var text = $("#text_url").val();
+        //     var param = $("#param_get").val();
+        //     var res = getQueryString(param, text);
+        //     if (res == null) $("#param_request").html("<span style=\"color: red\">未匹配到参数</span>");
+        //     else $("#param_request").html("<span style=\"color: green\">" + res + "</span>");
+        // }
+        // var url = "https://search.bilibili.com/all&?keyword=jsadsfsd141ed123";
+        // function getQueryString(name, text) {
+        //     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        //     var r = ("&" + text.split("?", 2)[1]).match(reg);
+        //     if (r != null) return unescape(r[2]); return null;
+        // }
+        // getQueryString('name', url)
+    </script>
+</body>
+
+</html>
